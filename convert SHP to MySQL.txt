@@ -1,0 +1,15 @@
+FORMULA:
+ogr2ogr -f "MySQL" MySQL:"[database_name],user=root,host=localhost,password=[root_password]" -lco engine=MYISAM airports.shp -s_srs EPSG:[source_epsg_code] -t_srs EPSG:[target_epsg_code]
+
+HOW TO USE:
+Replace [database_name] with your database name
+if you have password for root, replace [root_password] with your password, but
+if you don't have password for root (in case you use xampp), delete the part ",password=[root_password]
+[source_epsg_code] is the CRS used in your shp. Use qgis to get info about it
+[target_epsg_code] is the CRS that will be used in your mySQL-spatial. Usually people use EPSG:4326 (WGS84 long-lat)
+
+
+EXAMPLE:
+ogr2ogr -f "MySQL" MySQL:"geo,user=root,host=localhost,password=toor" -lco engine=MYISAM airports.shp -s_srs EPSG:2964 -t_srs EPSG:4326
+
+ogr2ogr -f "MySQL" MySQL:"geo,user=root,host=localhost" -lco engine=MYISAM airports.shp -s_srs EPSG:2964 -t_srs EPSG:4326
